@@ -1,5 +1,7 @@
 *.mp4
 Topic1/checkpoints/
+Topic3/checkpoints/
+Topic3/data/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
