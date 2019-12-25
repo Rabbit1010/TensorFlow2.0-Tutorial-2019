@@ -31,3 +31,16 @@ os.environ['CUDA_VISIBLE_DEVICES'] = '0,1' # use the 1st and 2nd GPU
 # os.environ['CUDA_VISIBLE_DEVICES'] = '-1' # use only GPU
 import tensorflow as tf # environment variable has to be changed before importing TensorFlow
 ```
+
+## tf.keras.utils.plot_model() Issues
+In Windows, try installing pydot and graphviz using conda:
+```bash
+conda install -c https://conda.binstar.org/t/TOKEN/j14r pydot
+conda install -c https://conda.binstar.org/t/TOKEN/j14r graphviz
+```
+
+In Linux, try installing the following:
+```bash
+pip install pydot-ng
+conda install graphviz
+```
