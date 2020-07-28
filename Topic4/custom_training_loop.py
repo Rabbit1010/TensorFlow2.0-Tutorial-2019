@@ -49,7 +49,7 @@ TOTAL_EPOCHS = 10
 @tf.function # with this function decorator, tensorflow compiles the function into graph
 def train_step(model, batch, optimizer):
     with tf.GradientTape() as tape: # tell the gradient tape to record the gradient
-        pred = model(batch[0])
+        pred = model(batch[0], training=True) # some layers have different operations in training and inference time
         target = batch[1]
 
         # calculate loss
