@@ -31,6 +31,25 @@ os.environ['CUDA_VISIBLE_DEVICES'] = '0,1' # use the 1st and 2nd GPU
 # os.environ['CUDA_VISIBLE_DEVICES'] = '-1' # use only GPU
 import tensorflow as tf # environment variable has to be changed before importing TensorFlow
 ```
+or in Tensorflow (Also controls TensorFlow GPU memory behaviour)
+```Python
+# Tensorflow GPU control
+gpu_idx = args.gpu_id
+limit_memory = args.limit_memory
+
+gpus = tf.config.experimental.list_physical_devices('GPU')
+if gpus:
+try:
+    tf.config.experimental.set_visible_devices(gpus[gpu_idx], 'GPU')
+    if limit_memory == True:
+	tf.config.experimental.set_memory_growth(gpus[gpu_idx], True)
+    logical_gpus = tf.config.experimental.list_logical_devices('GPU')
+    print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPU")
+    print('Using GPU num: {}'.format(gpu_idx))
+except RuntimeError as e:
+    # Visible devices must be set before GPUs have been initialized
+    print(e)
+```
 
 ## tf.keras.utils.plot_model() Issues
 In Windows, try installing pydot and graphviz using conda:
