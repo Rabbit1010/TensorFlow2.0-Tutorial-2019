@@ -34,21 +34,21 @@ import tensorflow as tf # environment variable has to be changed before importin
 or in Tensorflow (Also controls TensorFlow GPU memory behaviour)
 ```Python
 # Tensorflow GPU control
-gpu_idx = args.gpu_id
-limit_memory = args.limit_memory
+gpu_idx = 0
+limit_memory = True
 
 gpus = tf.config.experimental.list_physical_devices('GPU')
 if gpus:
-try:
-    tf.config.experimental.set_visible_devices(gpus[gpu_idx], 'GPU')
-    if limit_memory == True:
-	tf.config.experimental.set_memory_growth(gpus[gpu_idx], True)
-    logical_gpus = tf.config.experimental.list_logical_devices('GPU')
-    print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPU")
-    print('Using GPU num: {}'.format(gpu_idx))
-except RuntimeError as e:
-    # Visible devices must be set before GPUs have been initialized
-    print(e)
+    try:
+        tf.config.experimental.set_visible_devices(gpus[gpu_idx], 'GPU')
+        if limit_memory == True:
+        	tf.config.experimental.set_memory_growth(gpus[gpu_idx], True)
+        logical_gpus = tf.config.experimental.list_logical_devices('GPU')
+        print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPU")
+        print('Using GPU num: {}'.format(gpu_idx))
+    except RuntimeError as e:
+        # Visible devices must be set before GPUs have been initialized
+        print(e)
 ```
 
 ## tf.keras.utils.plot_model() Issues
